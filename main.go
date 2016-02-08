@@ -21,7 +21,11 @@ func main() {
   // http.ListenAndServe(":8080", http.xxx(http.Dir(".")))
 }
   func ShowQuestsion(rw http.ResponseWriter, r *http.Request) {
-    thecoachquestion := "första frågan"
+    questionlist := []byte {'f', 'a'}
+//    questionlist := []byte {'första frågan', 'andra frågan'}
+
+//    thecoachquestion := questionlist [1]
 //    markdown := blackfriday.MarkdownCommon([]byte(r.FormValue("body")))
-    rw.Write([]byte(thecoachquestion))
+    rw.Write(questionlist[1])
+//    rw.Write([]byte(thecoachquestion))
 }
