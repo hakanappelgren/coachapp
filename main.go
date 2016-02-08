@@ -1,9 +1,9 @@
 package main
 
-import
+import(
   "net/http"
   "os"
-
+)
 
 func main() {
   port := os.Getenv("PORT")
@@ -18,13 +18,10 @@ func main() {
   // start the server
   http.ListenAndServe(":"+port, nil)
   // http.ListenAndServe(":8080", nil)
-
-
   // http.ListenAndServe(":8080", http.xxx(http.Dir(".")))
-
+}
   func ShowQuestsion(rw http.ResponseWriter, r *http.Request) {
     thecoachquestion := "första frågan"
 //    markdown := blackfriday.MarkdownCommon([]byte(r.FormValue("body")))
-    rw.Write(thecoachquestion)
-}
+    rw.Write([]byte(thecoachquestion))
 }
