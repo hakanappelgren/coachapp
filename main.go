@@ -25,7 +25,7 @@ func main() {
   func ShowQuestion(rw http.ResponseWriter, r *http.Request) {
 //    questionlist := []byte {'f', 'a'}
 //    questionlist := []byte ("min första fråga")
-    questionlist := [...]string{"fråga 1", "fråga 2"}
+    questionlist := [...]string{"fråga 1", "fråga 22"}
     // index = rand.int31n(2)
     thequestion := questionlist[1]
 //    questionlist := "min första fråga"
