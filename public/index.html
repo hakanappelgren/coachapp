@@ -1,25 +1,44 @@
 <html>
   <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="Coacha dej själv">
+    <meta name="author" content="Håkan Appelgren">
+    <link rel="icon" href="../../favicon.ico">
+    <title>Coach-app</title>
+
+    <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="signin.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+
   </head>
+
   <body>
     <div class="container">
       <div class="page-title">
         <h1>Din personliga coach</h1>
-        <p class="lead">Driv dej framåt med smarta frågor version 2</p>
-        <hr />
-      </div>
+        <p class="lead">Driv dej framåt med smarta frågor</p>
+      </div><!-- /.page-title -->
 
-      <form action="/coachquestion" method="POST">
-        <div class="form-group">
-          <textarea class="form-control" name="body" cols="20" rows="5"></textarea>
-        </div>
-
-        <div class="form-group">
-          <input type="submit" class="btn btn-primary pull-center" />
+      <form class="form-signin" action="/coachquestion" method="POST">
+        <div class="continue-section">
+          <p>
+          <button type="submit" class="btn btn-lg btn-success btn-block">Kör igång!</button>
+          </p>
         </div>
       </form>
-    </div>
-    <script src="/js/bootstrap.min.js"></script>
+    </div><!-- /.container -->
+
+  <script src="/js/bootstrap.min.js"></script>
   </body>
 </html>

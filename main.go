@@ -2,9 +2,15 @@ package main
 
 import(
   "net/http"
+  "html/template"
   "os"
+  "path"
   //"math.rand"
 )
+
+type Question struct {
+  Thequestion string
+}
 
 func main() {
   port := os.Getenv("PORT")
@@ -14,24 +20,31 @@ func main() {
   // handle the specific requests
   http.HandleFunc("/coachquestion", ShowQuestion)
   //  http.HandleFunc("/coachquestion", GenerateMarkdown)
-  // handle all other requests
-  //ToDo: have to change this action and serve the start page insted och the FileServer stuff
+  // handle all other requests.
+  // direct to the index.html file in "public" directory
   http.Handle("/", http.FileServer(http.Dir("public")))
-  // start the server
+  // start the server and listen to port. "nil" will make the server run until stopped.
   http.ListenAndServe(":"+port, nil)
   // http.ListenAndServe(":8080", nil)
   // http.ListenAndServe(":8080", http.xxx(http.Dir(".")))
 }
+  func ShowAbout (rw http.ResponseWriter, r *http.Request) {
+
+}
   func ShowQuestion(rw http.ResponseWriter, r *http.Request) {
-//    questionlist := []byte {'f', 'a'}
-//    questionlist := []byte ("min första fråga")
     questionlist := [...]string{"fråga 1", "fråga 22"}
     // index = rand.int31n(2)
-    thequestion := questionlist[1]
-//    questionlist := "min första fråga"
+    myquestion := Question{questionlist[1]}
 
-//    thecoachquestion := questionlist [1]
-//    markdown := blackfriday.MarkdownCommon([]byte(r.FormValue("body")))
-//    rw.Write(questionlist[1])
-    rw.Write([]byte(thequestion))
+    fp := path.Join("public", "question.html")
+    tmpl, err := template.ParseFiles(fp)
+    if err != nil {
+        http.Error(rw, err.Error(), http.StatusInternalServerError)
+        return
+    }
+    if err := tmpl.Execute(rw, myquestion); err != nil {
+        http.Error(rw, err.Error(), http.StatusInternalServerError)
+    }
+
+//    rw.Write([]byte(thequestion))
 }
