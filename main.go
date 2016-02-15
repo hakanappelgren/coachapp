@@ -8,11 +8,15 @@ import(
   //"math.rand"
 )
 
+//global variables
+var qindex int = 0
+
 type Question struct {
   Thequestion string
 }
 
 func main() {
+
   port := os.Getenv("PORT")
     if port == "" {
   port = "8080"
@@ -32,9 +36,14 @@ func main() {
 
 }
   func ShowQuestion(rw http.ResponseWriter, r *http.Request) {
-    questionlist := [...]string{"fråga 1", "fråga 22"}
+    questionlist := [...]string{"fråga 1", "fråga 2"}
     // index = rand.int31n(2)
-    myquestion := Question{questionlist[1]}
+    if qindex < 1 {
+      qindex = qindex + 1
+    } else {
+      qindex = 0
+    }
+    myquestion := Question{questionlist[qindex]}
 
     fp := path.Join("public", "question.html")
     tmpl, err := template.ParseFiles(fp)
