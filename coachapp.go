@@ -22,7 +22,7 @@ func main() {
     if port == "" {
   port = "8080"
   }
-  
+
   // handle the specific requests
   http.HandleFunc("/coachquestion", ShowQuestion)
   //  http.HandleFunc("/coachquestion", GenerateMarkdown)
@@ -42,7 +42,16 @@ func main() {
   func ShowQuestion(rw http.ResponseWriter, r *http.Request) {
     questionlist := [...]string{"fråga 1", "fråga 2"}
     // index = rand.int31n(2)
-    myquestion := Question{questionlist[GetIndex]}
+    if qindex < 1 {
+      fmt.Printf("qindex < 1, dvs =0 \n")
+      qindex = qindex + 1
+    } else {
+      fmt.Printf("qindex > 0, dvs =1 \n")
+      qindex = 0
+    }
+
+    myquestion := Question{questionlist[qindex]}
+//    myquestion := Question{questionlist[GetIndex]}
 //        rw.Write([]byte("fråga 1"))
 
     fp := path.Join("public", "question.html")
@@ -58,6 +67,7 @@ func main() {
 }
 
   func GetIndex() int {
+    var tempindex int
     if qindex < 1 {
       fmt.Printf("qindex < 1, dvs =0 \n")
       qindex = qindex + 1
@@ -65,5 +75,6 @@ func main() {
       fmt.Printf("qindex > 0, dvs =1 \n")
       qindex = 0
     }
-   return qindex
+    tempindex = qindex
+   return tempindex
 }
