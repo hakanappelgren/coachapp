@@ -16,12 +16,35 @@ type Question struct {
   Thequestion string
 }
 
+func GetIndex(x int) int {
+  var ind int = x
+  if ind == 0 {
+    return 1
+  } else {
+    return 0
+  }
+
+
+//    if qindex < 1 {
+//      fmt.Printf("qindex < 1, dvs =0 \n")
+//      qindex = qindex + 1
+//    } else {
+//      fmt.Printf("qindex > 0, dvs =1 \n")
+//      qindex = 0
+//    }
+//    tempindex = qindex
+//   return tempindex
+}
+
+
 func main() {
   fmt.Printf("början av main.\n")
   port := os.Getenv("PORT")
     if port == "" {
   port = "8080"
   }
+  fmt.Println(port)
+
 
   // handle the specific requests
   http.HandleFunc("/coachquestion", ShowQuestion)
@@ -42,6 +65,8 @@ func main() {
   func ShowQuestion(rw http.ResponseWriter, r *http.Request) {
     questionlist := [...]string{"fråga 1", "fråga 2"}
     // index = rand.int31n(2)
+    //This section is only a quick and dirty to get index iterating
+    //Replace by function returning index
     if qindex < 1 {
       fmt.Printf("qindex < 1, dvs =0 \n")
       qindex = qindex + 1
@@ -64,17 +89,4 @@ func main() {
         http.Error(rw, err.Error(), http.StatusInternalServerError)
     }
 
-}
-
-  func GetIndex() int {
-    var tempindex int
-    if qindex < 1 {
-      fmt.Printf("qindex < 1, dvs =0 \n")
-      qindex = qindex + 1
-    } else {
-      fmt.Printf("qindex > 0, dvs =1 \n")
-      qindex = 0
-    }
-    tempindex = qindex
-   return tempindex
 }
