@@ -63,7 +63,7 @@ func main() {
 }
 
   func ShowQuestion(rw http.ResponseWriter, r *http.Request) {
-    questionlist := [...]string{"fråga 1", "fråga 2"}
+    questionlist := [...]string{"Ny fråga 1", "NY fråga 2"}
     // index = rand.int31n(2)
     //This section is only a quick and dirty to get index iterating
     //Replace by function returning index
