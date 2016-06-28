@@ -10,19 +10,35 @@ import(
 )
 
 //global variables
-var qindex int = 0
+ var currentindex int = 0
+ var randomquestions boolean = true
 
 type Question struct {
   Thequestion string
 }
 
-func GetIndex(x int) int {
-  var ind int = x
-  if ind == 0 {
-    return 1
-  } else {
-    return 0
-  }
+func GetIndex(thelength int, randomindex boolean, currentindex int) int {
+	// return an integer [0, thelength-1]
+	if randomindex {
+        index = rand.Intn(thelength) // return an integer [0, thelength-1]
+    } else {
+    	if currentindex < thelength-1 {
+    		index = currentindex + 1}
+    	else {
+    		index = 0
+    	}
+    }
+  	return index
+}
+
+func GetQuestion (currentindex int)string {
+	questionlist := [...]string{"Ny fråga 1", "Nästan ny fråga 2", "fråga 3"}
+	index = GetIndex(len(questionlist), randomquestions, currentindex)
+	if not randomquestion {
+		currentindex = index
+	}
+	return questionlist[index]
+}
 
 
 //    if qindex < 1 {
@@ -45,6 +61,9 @@ func main() {
   }
   fmt.Println(port)
 
+	// initialize variables
+// 	var qindex int = 0
+// 	var randomquestions boolean = true
 
   // handle the specific requests
   http.HandleFunc("/coachquestion", ShowQuestion)
@@ -63,8 +82,8 @@ func main() {
 }
 
   func ShowQuestion(rw http.ResponseWriter, r *http.Request) {
-    questionlist := [...]string{"Ny fråga 1", "NY fråga 2"}
-    // index = rand.int31n(2)
+    questionlist := [...]string{"Ny fråga 1", "Nästan ny fråga 2"}
+    // index = rand.Intn(6) + 1 // return an integer [1, 6
     //This section is only a quick and dirty to get index iterating
     //Replace by function returning index
     if qindex < 1 {
