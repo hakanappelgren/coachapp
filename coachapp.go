@@ -6,25 +6,26 @@ import(
   "os"
   "path"
   "fmt"
-  //"math.rand"
+  "math/rand"
 )
 
 //global variables
  var currentindex int = 0
- var randomquestions boolean = true
+ var randomquestions bool = true
 
 type Question struct {
   Thequestion string
 }
 
-func GetIndex(thelength int, randomindex boolean, currentindex int) int {
+func GetIndex(thelength int, randomindex bool, currentindex int) int {
 	// return an integer [0, thelength-1]
+	var index int = 0
 	if randomindex {
         index = rand.Intn(thelength) // return an integer [0, thelength-1]
     } else {
     	if currentindex < thelength-1 {
-    		index = currentindex + 1}
-    	else {
+    		index = currentindex + 1
+    	} else {
     		index = 0
     	}
     }
@@ -32,26 +33,12 @@ func GetIndex(thelength int, randomindex boolean, currentindex int) int {
 }
 
 func GetQuestion (currentindex int)string {
+	var index int = 0
 	questionlist := [...]string{"Ny fråga 1", "Nästan ny fråga 2", "fråga 3"}
 	index = GetIndex(len(questionlist), randomquestions, currentindex)
-	if not randomquestion {
-		currentindex = index
-	}
+	currentindex = index
 	return questionlist[index]
 }
-
-
-//    if qindex < 1 {
-//      fmt.Printf("qindex < 1, dvs =0 \n")
-//      qindex = qindex + 1
-//    } else {
-//      fmt.Printf("qindex > 0, dvs =1 \n")
-//      qindex = 0
-//    }
-//    tempindex = qindex
-//   return tempindex
-}
-
 
 func main() {
   fmt.Printf("början av main.\n")
@@ -86,15 +73,15 @@ func main() {
     // index = rand.Intn(6) + 1 // return an integer [1, 6
     //This section is only a quick and dirty to get index iterating
     //Replace by function returning index
-    if qindex < 1 {
-      fmt.Printf("qindex < 1, dvs =0 \n")
-      qindex = qindex + 1
+    if currentindex < 1 {
+      fmt.Printf("currentindex < 1, dvs =0 \n")
+      currentindex = currentindex + 1
     } else {
-      fmt.Printf("qindex > 0, dvs =1 \n")
-      qindex = 0
+      fmt.Printf("currentindex > 0, dvs =1 \n")
+      currentindex = 0
     }
 
-    myquestion := Question{questionlist[qindex]}
+    myquestion := Question{questionlist[currentindex]}
 //    myquestion := Question{questionlist[GetIndex]}
 //        rw.Write([]byte("fråga 1"))
 
