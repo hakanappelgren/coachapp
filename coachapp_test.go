@@ -27,19 +27,17 @@ func TestGetQuestion (t *testing.T) {
 	cases := []struct {
 		index int;
 		israndom bool;
-		want string
+		wantQuestion string;
+		wantIndex int
 	}{
-		{0, false, "andra frågan"},
-		{1, false, "tredje frågan"},
-		{2, false, "första frågan"},
-		{0, true, "andra frågan"},
-		{1, true, "andra frågan"},
-		{2, true, "tredje frågan"},
+		{0, false, "andra frågan", 1},
+		{1, false, "tredje frågan", 2},
+		{2, false, "första frågan", 0},
 	}
 	for _, c := range cases {
-		got := GetQuestion (c.israndom, c.index)
-		if got != c.want {
-			t.Errorf("Function: GetQuestion: got %q for index %q, want %q", got, c.index, c.want)
+		gotQ, gotI := GetQuestion (c.index, c.israndom)
+		if gotI != c.wantIndex {
+			t.Errorf("Function: GetQuestion: Index %q, got %q and %q, want %q and %q", c.index, gotQ, gotI, c.wantQuestion, c.wantIndex)
 		}
 	}
 }

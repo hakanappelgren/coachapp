@@ -12,10 +12,48 @@ import(
 //global variables
 var Israndom bool = true
 var Masterindex int = 0
-
+ 
 type Question struct {
   Thequestion string
 }
+
+// func InitializeVariables {
+  //@ToDo read text file and initialize variables
+
+  // Read a slice from a jason file
+  // import (
+  //     "encoding/json"
+  //     "fmt"
+  //     "io/ioutil"
+  // )
+
+  //     data, err := ioutil.ReadFile("data.json")
+  //     if err != nil {
+  //         fmt.Println(err)
+  //         return
+  //     }
+  //     fmt.Print("data:  ",string(data))
+  //     var slice []string
+  //     err = json.Unmarshal(data, &slice)
+  //     if err != nil {
+  //         fmt.Println(err)
+  //         return
+  //     }
+  //     fmt.Printf("slice: %q\n",slice)
+  //}
+
+
+  // f, err := os.Open("data/list.txt") // For read access.
+  // if err != nil {
+  //     // Failed to open file, log / handle error
+  //     log.Fatal("Open Filename: ", err)
+  //     panic(err)
+  //     fmt.Println(err)
+  //     return
+  // }
+  // defer f.Close()
+  // Here you may read from f
+// }
 
 func GetIndex(thelength int, userandomindex bool, currentindex int) int {
 	// return an integer [0, thelength-1]
@@ -33,7 +71,7 @@ func GetIndex(thelength int, userandomindex bool, currentindex int) int {
 }
 
 func GetQuestion (currentindex int, userandomindex bool) (string, int) {
-	questionlist := [...]string{"Ny fråga 1", "Nästan ny fråga 2", "fråga 3"}
+	questionlist := [...]string{"Vad är ditt nästa steg?", "Vad är det värsta som kan hända?", "Hur ser ditt drömmål ut?", "Hur känner du inför uppgiften?", "Kan du utveckla?"}
 	index := GetIndex(len(questionlist), userandomindex, currentindex)
 	return questionlist[index], index
 }
@@ -63,7 +101,6 @@ func main() {
   func ShowQuestion(rw http.ResponseWriter, r *http.Request) {
     myquestion, newIndex := GetQuestion(Masterindex, Israndom)
     Masterindex = newIndex
-    fmt.Println("Masterindex: ", Masterindex)
 
     fp := path.Join("public", "question.html")
     tmpl, err := template.ParseFiles(fp)
